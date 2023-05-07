@@ -1,0 +1,33 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# files
+[*.cs]
+indent_size = 4
+
+dotnet_separate_import_directive_groups = false
+dotnet_sort_system_directives_first = true:warning
+
+# Json files
+[*.json]
+indent_size = 2
+
+[*.html]
+indent_size = 4
+
+[*.ts]
+quote_type = single
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+# yml files
+[*.yml]
+indent_size = 2
+indent_style = space
