@@ -16,9 +16,9 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-// builder.Services.AddScoped<IStarRepository, StarRepository>();
-// builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
-// builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IStarRepository, StarRepository>();
+builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 var app = builder.Build();
 
