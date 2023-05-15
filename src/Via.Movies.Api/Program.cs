@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Via.Movies.Api.Data;
+using Via.Movies.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services
     });
 
 builder.Services.AddControllers();
+
+
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IStarRepository, StarRepository>();
+builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 var app = builder.Build();
 
