@@ -1,9 +1,9 @@
 
-<app-nav>
+<app-nav (onSearchFieldChanged)="findMovie($event)">
   
 </app-nav>
   <!-- Intro Section -->
-  <section class="relative overflow-hidden mb-2"> 
+  <section class="relative overflow-hidden mb-2" *ngIf="!searchText"> 
     <!-- The video -->
     <video autoplay muted loop class="w-full h-full object-cover absolute z-0">
       <source src="assets/video/hero.webm" type="video/webm">
@@ -32,7 +32,7 @@
   </section>
   
   <!-- Main Content -->
-  <section class="container mx-auto">
+  <section class="container mx-auto" *ngIf="!searchText">
     <h1 class="uppercase text-center text-4xl grid mt-20 mb-12 items-center gap-8 tracking-widest latest">Latest</h1>
 
     <!-- Snoozeflix List -->
@@ -247,5 +247,11 @@
         </div>
   
       </a>
+    </div>
+  </section>
+
+  <section *ngIf="searchText">
+    <div *ngFor="let movie of cachedList">
+      {{movie.Title}}
     </div>
   </section>

@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  searchText = '';
+
   persons: any[] = [
     // create an array of persons with Id, Name, and Birth.
       { Id: 1, Name: 'John Doe', Birth: '01/01/1970' },
@@ -28,4 +32,23 @@ export class AppComponent {
       ];
         
   title = 'Via.Movies.Angular';
+
+
+  cachedList: any[] = [];
+
+  ngOnInit(): void {
+    for (let director of this.directors) {
+      this.movies.find(movie => movie.Id === director.MovieId).Director = this.persons.find(person => person.Id === director.PersonId).Name;
+    }
+  }
+
+  findMovie(searchText: string) {
+    this.searchText = searchText;
+    if (searchText === '') {
+      this.cachedList = this.movies;
+    }
+    else {
+      this.cachedList = this.movies.filter(movie => movie.Title.toLowerCase().includes(searchText.toLowerCase()));
+    }
+  }
 }
