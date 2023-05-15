@@ -68,6 +68,13 @@ body {
     border-bottom: 3px solid #fff;
   }
   
+  .justify-content-between {
+    justify-content: space-between;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
   
   @-webkit-keyframes shadow {
     0% {
