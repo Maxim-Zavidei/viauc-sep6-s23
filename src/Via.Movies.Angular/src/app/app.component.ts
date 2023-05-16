@@ -48,7 +48,7 @@ export class AppComponent {
       this.cachedList = this.movies;
     }
     else {
-      this.cachedList = this.movies.filter(movie => movie.Title.toLowerCase().includes(searchText.toLowerCase()));
+      this.cachedList = this.movies.filter(movie => movie.Title.toLowerCase().includes(searchText.toLowerCase()) || movie.Director.toLowerCase().includes(searchText.toLowerCase()));
     }
   }
 }
