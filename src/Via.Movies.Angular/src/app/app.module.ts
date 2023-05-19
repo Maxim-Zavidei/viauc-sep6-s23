@@ -5,16 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { UserModule } from './user/user.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    MovieCardComponent
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
