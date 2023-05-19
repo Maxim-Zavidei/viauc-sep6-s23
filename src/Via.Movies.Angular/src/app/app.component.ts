@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   searchText = '';
+  loginModalVisible = false;
 
   persons: any[] = [
     // create an array of persons with Id, Name, and Birth.

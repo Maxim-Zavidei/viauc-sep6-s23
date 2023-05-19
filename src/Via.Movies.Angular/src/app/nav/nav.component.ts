@@ -8,6 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class NavComponent implements OnInit {
 
   @Output() onSearchFieldChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onLoginModalVisibleChanged: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -16,4 +18,6 @@ export class NavComponent implements OnInit {
   searchFieldChanged(event: any) {
     this.onSearchFieldChanged.emit(event.target.value);
   }
+
+  
 }

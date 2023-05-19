@@ -1,18 +1,18 @@
-<app-model>
+<app-model (onModalClose)="onModalClose.emit(true)">
     <!-- Tabs -->
     <ul class="flex flex-wrap mb-4">
       <li class="flex-auto text-center">
-        <a class="block rounded py-3 px-4 transition hover:text-white text-white
-          bg-indigo-400" href="#">Login</a>
+        <button class="block rounded py-3 px-4 transition hover:text-white text-white
+          bg-indigo-400" (click)="currentTab=0" [class.bg-indigo-400]="currentTab==0">Login</button>
       </li>
       <li class="flex-auto text-center">
-        <a class="block rounded py-3 px-4 transition hover:text-indigo-400" 
-          href="#">Register</a>
+        <button class="block rounded py-3 px-4 transition hover:text-indigo-400" 
+          (click)="currentTab=1" [class.bg-indigo-400]="currentTab==1">Register</button>
       </li>
     </ul>
 
     <!-- Login Form -->
-    <form>
+    <form *ngIf="currentTab==0">
       <!-- Email -->
       <div class="mb-3">
         <label class="inline-block mb-2">Email</label>
@@ -37,7 +37,7 @@
       </button>
     </form>
     <!-- Registration Form -->
-    <form>
+    <form *ngIf="currentTab==1">
       <!-- Name -->
       <div class="mb-3">
         <label class="inline-block mb-2">Name</label>
