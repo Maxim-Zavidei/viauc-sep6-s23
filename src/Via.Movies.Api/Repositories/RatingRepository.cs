@@ -18,6 +18,16 @@ public class RatingRepository : IRatingRepository
 		return await dbContext.Ratings.ToListAsync();
 	}
 
+	public async Task<double> GetAverageRatingOfMovie(int movieId)
+	{
+		var ratings = await dbContext.Ratings.Where(e => e.MovieId == movieId).ToListAsync();
+
+		double averageRating = ratings.Sum(e => e.Rating1 * e.Votes);
+		int totalRatings = ratings.Sum(e => e.Votes);
+
+		return averageRating / totalRatings;
+	}
+
 	public async Task<Rating?> UpdateRatingAsync(Rating rating)
 	{
 		if (rating.Rating1 < 0) return null;
