@@ -21,7 +21,7 @@ public class MovieRepository : IMovieRepository
 
 	public async Task DeleteMovieAsync(int id)
 	{
-		var movie = await _context.Movies.FindAsync(id);
+		var movie = await _context.Movies.FirstOrDefaultAsync(e => e.Id == id);
         if (movie == null)
         {
             throw new Exception("Movie not found");
@@ -30,14 +30,16 @@ public class MovieRepository : IMovieRepository
         await _context.SaveChangesAsync();
 	}
 
-	public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
+	public async Task<IEnumerable<Movie>> GetSomeMoviesAsync(int number)
 	{
-		return await _context.Movies.ToListAsync();
+		var rand = new Random();
+		var skip = (int)(rand.NextDouble() * (_context.Movies.Count() - number));
+		return await _context.Movies.OrderBy(e => e.Id).Skip(skip).Take(number).ToListAsync();
 	}
 
 	public async Task<Movie?> GetMovieAsync(int id)
 	{
-		return await _context.Movies.FindAsync(id);
+		return await _context.Movies.FirstOrDefaultAsync(e => e.Id == id);
 	}
 
 	public  Task<IEnumerable<Movie?>> SearchForMovieByPeople(string name)
