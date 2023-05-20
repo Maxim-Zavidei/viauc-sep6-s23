@@ -13,7 +13,7 @@ const PROXY_CONFIG = [
 	{
 		// Specify the API endpoints that should be proxied to Via.Movies.Api
 		context: [
-			"/api/wheatherforecast/"
+			"/api/movie/"
 		],
 		// Set the target URL for the proxy, which should point Via.Movies.Api
 		target: target,
