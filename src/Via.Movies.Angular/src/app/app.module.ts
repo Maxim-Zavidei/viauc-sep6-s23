@@ -18,7 +18,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     AppRoutingModule,
 		HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
