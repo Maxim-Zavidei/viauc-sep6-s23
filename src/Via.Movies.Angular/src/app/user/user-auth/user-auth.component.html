@@ -12,11 +12,11 @@
     </ul>
 
     <!-- Login Form -->
-    <form *ngIf="currentTab==0">
+    <div *ngIf="currentTab==0">
       <!-- Email -->
       <div class="mb-3">
         <label class="inline-block mb-2">Email</label>
-        <input type="email"
+        <input type="email" (keyup)="fieldChanged('login', 'email', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent
             focus:border-indigo-400"
@@ -25,23 +25,25 @@
       <!-- Password -->
       <div class="mb-3">
         <label class="inline-block mb-2">Password</label>
-        <input type="password"
+        <input type="password" (keyup)="fieldChanged('login', 'password', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
           duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Password" />
       </div>
-      <button type="submit"
+    
+      <button type="submit" (click)="submitLogin()"
         class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
           hover:bg-indigo-500">
         Submit
       </button>
-    </form>
+      
+    </div>
     <!-- Registration Form -->
-    <form *ngIf="currentTab==1">
+    <div *ngIf="currentTab==1">
       <!-- Name -->
       <div class="mb-3">
         <label class="inline-block mb-2">Name</label>
-        <input type="text"
+        <input type="name"  (keyup)="fieldChanged('register','name', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Enter Name" />
@@ -49,7 +51,7 @@
       <!-- Email -->
       <div class="mb-3">
         <label class="inline-block mb-2">Email</label>
-        <input type="email"
+        <input type="email"  (keyup)="fieldChanged('register','email', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Enter Email" />
@@ -57,14 +59,14 @@
       <!-- Age -->
       <div class="mb-3">
         <label class="inline-block mb-2">Age</label>
-        <input type="number"
+        <input type="number" (keyup)="fieldChanged('register','age', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400" />
       </div>
       <!-- Password -->
       <div class="mb-3">
         <label class="inline-block mb-2">Password</label>
-        <input type="password"
+        <input type="password" (keyup)="fieldChanged('register','password', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Password" />
@@ -72,7 +74,7 @@
       <!-- Confirm Password -->
       <div class="mb-3">
         <label class="inline-block mb-2">Confirm Password</label>
-        <input type="password"
+        <input type="password" (keyup)="fieldChanged('register','confirmPassword', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Confirm Password" />
@@ -80,15 +82,15 @@
       <!-- Phone Number -->
       <div class="mb-3">
         <label class="inline-block mb-2">Phone Number</label>
-        <input type="text"
+        <input type="text" (keyup)="fieldChanged('register','phoneNumber', $event)"
           class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
             duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
           placeholder="Enter Phone Number" />
       </div>
-      <button type="submit"
+      <button type="submit" (click)="submitRegister()"
         class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
           hover:bg-indigo-500">
         Submit
       </button>
-    </form>
+    </div>
 </app-model>

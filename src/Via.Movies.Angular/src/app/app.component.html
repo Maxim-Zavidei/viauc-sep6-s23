@@ -1,4 +1,4 @@
-<app-nav (onSearchFieldChanged)="findMovie($event)" (onLoginModalVisibleChanged)="loginModalVisible=!loginModalVisible">
+<app-nav (onSearchFieldChanged)="findMovie($event)" (onLoginModalVisibleChanged)="loginModalVisible=!loginModalVisible" #nav>
 
 </app-nav>
 <!-- Intro Section -->
@@ -49,6 +49,6 @@
   </div>
 </section>
 
-<app-user-auth *ngIf="loginModalVisible" (onModalClose)="loginModalVisible=false">
+<app-user-auth *ngIf="loginModalVisible" (onModalClose)="loginModalVisible=false" (onLoginStatusChanged)="loginStatusChanged()">
   
 </app-user-auth>

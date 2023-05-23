@@ -1,7 +1,8 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { MovieService } from './services/movie.service';
+import { NavComponent } from './nav/nav.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   persons: any[] = [];
   directors: any[] = [];
   title = 'Via.Movies.Angular';
-
+  @ViewChild('nav', {static: false}) nav: NavComponent | undefined;
 
   cachedList: any[] = [];
 
@@ -41,5 +42,12 @@ export class AppComponent {
     else {
       this.cachedList = this.movies.filter(movie => movie.title.toLowerCase().includes(searchText.toLowerCase()) || movie.directorName.toLowerCase().includes(searchText.toLowerCase()));
     }
+  }
+
+  loginStatusChanged() {
+    this.loginModalVisible = false;
+    if (this.nav)
+    this.nav.loginStatusChanged();
+    
   }
 }

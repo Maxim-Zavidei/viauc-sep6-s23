@@ -19,6 +19,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost]
+    [Route("login")]
     public async Task<ActionResult> LoginAsync([FromBody] LoginRequest loginRequest)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -27,7 +28,7 @@ public class AccountController : ControllerBase
 
         if (result.Succeeded)
         {
-            return Ok();
+            return Ok(result);
         }
         else
         {
@@ -37,6 +38,7 @@ public class AccountController : ControllerBase
     
 
     [HttpPost]
+    [Route("register")]
     public async Task<ActionResult> RegisterAsync([FromBody] RegisterRequest registerRequest)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
