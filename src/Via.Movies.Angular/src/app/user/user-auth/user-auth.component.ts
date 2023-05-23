@@ -10,14 +10,12 @@ export class UserAuthComponent implements OnInit {
 @Output() onModalClose: EventEmitter<any> = new EventEmitter<any>();
 currentTab: number = 0;
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
     
   }
 
   ngOnInit(): void {
-    this.route.url.subscribe(url => {
-      this.currentTab = url[0].path === 'login' ? 0 : 1;
-    });
+  
   }
 
 
