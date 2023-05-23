@@ -15,7 +15,13 @@ builder.Services
     });
 
 builder.Services.AddControllers();
-
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowMyApp",
+            builder => builder.WithOrigins("http://localhost:4200") 
+                              .AllowAnyHeader()
+                              .AllowAnyMethod());
+    });
 builder.Services.AddDbContext<IdentityDbContext>(opt =>
 {
    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -50,8 +56,17 @@ builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
+
 var app = builder.Build();
 
+app.UseCors(builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithExposedHeaders("Location");
+    });
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { UserModule } from './user/user.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     UserModule
   ],
   providers: [],
