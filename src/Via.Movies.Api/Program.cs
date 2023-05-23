@@ -12,6 +12,7 @@ builder.Services
     .AddDbContext<ViaMoviesDbContext>(opt =>
     {
         opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+		opt.EnableSensitiveDataLogging(true);
     });
 
 builder.Services.AddControllers();
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 var app = builder.Build();
 
+// Allow CORS and PUT, POST, DELETE etc.
 app.UseCors(builder =>
     {
         builder
@@ -67,6 +69,8 @@ app.UseCors(builder =>
             .AllowAnyHeader()
             .WithExposedHeaders("Location");
     });
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

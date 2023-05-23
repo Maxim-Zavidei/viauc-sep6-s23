@@ -47,6 +47,8 @@ export class AppComponent {
 
   cachedList: any[] = [];
 
+	constructor(private movieService: MovieService) { }
+
   ngOnInit(): void {
     this.apiAdapter.getAllMovies().subscribe((data: any[]) => {
       this.movies = data;
@@ -63,7 +65,7 @@ export class AppComponent {
       this.cachedList = this.movies;
     }
     else {
-      this.cachedList = this.movies.filter(movie => movie.Title.toLowerCase().includes(searchText.toLowerCase()) || movie.Director.toLowerCase().includes(searchText.toLowerCase()));
+      this.cachedList = this.movies.filter(movie => movie.title.toLowerCase().includes(searchText.toLowerCase()) || movie.directorName.toLowerCase().includes(searchText.toLowerCase()));
     }
   }
 }

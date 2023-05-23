@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Via.Movies.Api.Dtos;
 using Via.Movies.Api.Models;
 using Via.Movies.Api.Repositories;
 
@@ -10,27 +11,65 @@ namespace Via.Movies.Api.Controllers;
 public class MovieController : ControllerBase
 {
     private IMovieRepository movieRepository;
+	private IDirectorRepository directorRepository;
+	private IRatingRepository ratingRepository;
 
-    public MovieController(IMovieRepository movieRepository)
+    public MovieController(IMovieRepository movieRepository, IDirectorRepository directorRepository, IRatingRepository ratingRepository)
     {
         this.movieRepository = movieRepository;
+		this.directorRepository = directorRepository;
+		this.ratingRepository = ratingRepository;
     }
-    
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Movie>>> GetAllMoviesAsync()
+    public async Task<ActionResult<IEnumerable<GetMovieRequest>>> GetAllMoviesAsync([FromQuery] int? number)
     {
-        return Ok(await movieRepository.GetAllMoviesAsync());
+		if (number == null) number = 10;
+		var movies = await movieRepository.GetSomeMoviesAsync(number.Value);
+
+		List<GetMovieRequest> response = new List<GetMovieRequest>();
+
+		foreach (Movie movie in movies)
+		{
+			var personDirector = await directorRepository.GetDirectorOfMovie(movie.Id);
+
+			var averageRating = 0;
+			response.Add(new GetMovieRequest
+			{
+				Id = movie.Id,
+				Title = movie.Title,
+				Year = movie.Year,
+				AverageRating = averageRating,
+				DirectorId = personDirector == null ? null : personDirector.Id,
+				DirectorName = personDirector == null ? null : personDirector.Name,
+				DirectorBirth = personDirector == null ? null : personDirector.Birth
+			});
+		}
+        return Ok(response);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Movie>> GetMovieAsync(int id)
+    public async Task<ActionResult<GetMovieRequest>> GetMovieAsync(int id)
     {
         var movie = await movieRepository.GetMovieAsync(id);
         if (movie == null)
         {
             return NotFound();
         }
-        return Ok(movie);
+
+		var personDirector = await directorRepository.GetDirectorOfMovie(id);
+
+			var averageRating = 0;
+			return new GetMovieRequest
+			{
+				Id = movie.Id,
+				Title = movie.Title,
+				Year = movie.Year,
+				AverageRating = averageRating,
+				DirectorId = personDirector == null ? null : personDirector.Id,
+				DirectorName = personDirector == null ? null : personDirector.Name,
+				DirectorBirth = personDirector == null ? null : personDirector.Birth
+			};
     }
 
     [HttpGet("search")]

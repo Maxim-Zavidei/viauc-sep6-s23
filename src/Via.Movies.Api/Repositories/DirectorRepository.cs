@@ -17,6 +17,15 @@ public class DirectorRepository : IDirectorRepository
 		return await dbContext.Directors.ToListAsync();
 	}
 
+	public async Task<Person?> GetDirectorOfMovie(int movieId)
+	{
+		var director = await dbContext.Directors.FirstOrDefaultAsync(e => e.MovieId == movieId);
+
+		if (director == null) return null;
+		var personDirector = await dbContext.People.FirstOrDefaultAsync(e => e.Id == director.PersonId);
+		return personDirector;
+	}
+
 	public async Task<Director> CreateDirectorAsync(Director director)
 	{
 		if ((await dbContext.People.AnyAsync(e => e.Id == director.PersonId)))

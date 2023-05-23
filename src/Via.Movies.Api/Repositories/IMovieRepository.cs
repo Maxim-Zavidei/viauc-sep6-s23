@@ -4,7 +4,7 @@ namespace Via.Movies.Api.Repositories
 {
     public interface IMovieRepository
     {
-        Task<IEnumerable<Movie>> GetAllMoviesAsync();
+        Task<IEnumerable<Movie>> GetSomeMoviesAsync(int number);
         Task<Movie?> GetMovieAsync(int id);
         Task<IEnumerable<Movie?>> SearchForMovieByTitle(string title);
         Task<IEnumerable<Movie?>> SearchForMovieByPeople(string name);
