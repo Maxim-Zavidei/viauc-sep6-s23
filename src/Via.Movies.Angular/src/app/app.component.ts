@@ -1,7 +1,8 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
 import { ApiAdapterService } from './services/api-adapter.service';
+import { MovieService } from './services/movie.service';
 
 @Component({
   selector: 'app-root',
@@ -39,15 +40,12 @@ export class AppComponent {
   //     ];
   //       
 
-  constructor(private apiAdapter: ApiAdapterService) {
-    
-  }
   title = 'Via.Movies.Angular';
 
 
   cachedList: any[] = [];
 
-	constructor(private movieService: MovieService) { }
+	constructor(private movieService: MovieService, private apiAdapter: ApiAdapterService) { }
 
   ngOnInit(): void {
     this.apiAdapter.getAllMovies().subscribe((data: any[]) => {
