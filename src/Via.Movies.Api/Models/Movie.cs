@@ -1,6 +1,6 @@
 ﻿namespace Via.Movies.Api.Models;
 
-public partial class Movie
+public class Movie
 {
     public required int Id { get; set; }
     public required string Title { get; set; }
