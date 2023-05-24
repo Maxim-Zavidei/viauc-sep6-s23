@@ -52,3 +52,6 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+// For integration testing.
+public partial class Program {}
