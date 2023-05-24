@@ -22,7 +22,7 @@ public class MovieController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetMovieRequest>>> GetAllMoviesAsync([FromQuery] int? number)
+    public async Task<ActionResult<IEnumerable<GetMovieRequest>>> GetSomeMoviesAsync([FromQuery] int? number)
     {
 		if (number == null) number = 25;
 		var movies = await movieRepository.GetSomeMoviesAsync(number.Value);

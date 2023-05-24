@@ -34,7 +34,6 @@ public partial class ViaMoviesDbContext : DbContext
         modelBuilder.Entity<Movie>(entity =>
         {
             entity
-                .HasNoKey()
                 .ToTable("movies");
 
             entity.Property(e => e.Id).HasColumnName("id");
