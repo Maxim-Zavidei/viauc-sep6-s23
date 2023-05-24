@@ -6,13 +6,17 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <a class="px-2" href="#">Login / Register</a>
+            <a class="px-2" href="#" (click)="onLoginModalVisibleChanged.emit(true)" *ngIf="userEmail == '' ">Login / Register</a>
+            <strong *ngIf="userEmail != '' ">{{userEmail}}</strong>
           </li>
           <li>
             <a class="px-2" href="#">Browse</a>
           </li>
           <li>
             <a class="px-2" href="about.html">About</a>
+          </li>
+          <li>
+            <a class="px-2" href="#" (click)="logout()">Logout</a>
           </li>
         </ul>
         

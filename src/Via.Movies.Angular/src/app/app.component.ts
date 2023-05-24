@@ -1,7 +1,8 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
 import { MovieService } from './services/movie.service';
-import { Movie } from './movie-card/movie';
+import { NavComponent } from './nav/nav.component';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +11,24 @@ import { Movie } from './movie-card/movie';
 })
 export class AppComponent {
 
+
   searchText = '';
-
-	movies: Movie[] = [];
-
+  loginModalVisible = false;
+  movies: any[] = [];
+  persons: any[] = [];
+  directors: any[] = [];
   title = 'Via.Movies.Angular';
-
+  @ViewChild('nav', {static: false}) nav: NavComponent | undefined;
 
   cachedList: any[] = [];
 
 	constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-
-		this.movieService.getMovies().subscribe(data => {
+    this.movieService.getMovies().subscribe((data: any[]) => {
       this.movies = data;
+      this.cachedList = this.movies;
     });
-
     // for (let director of this.directors) {
     //   this.movies.find(movie => movie.Id === director.MovieId).Director = this.persons.find(person => person.Id === director.PersonId).Name;
     // }
@@ -40,5 +42,12 @@ export class AppComponent {
     else {
       this.cachedList = this.movies.filter(movie => movie.title.toLowerCase().includes(searchText.toLowerCase()) || movie.directorName.toLowerCase().includes(searchText.toLowerCase()));
     }
+  }
+
+  loginStatusChanged() {
+    this.loginModalVisible = false;
+    if (this.nav)
+    this.nav.loginStatusChanged();
+    
   }
 }

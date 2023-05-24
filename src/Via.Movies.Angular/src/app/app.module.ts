@@ -1,24 +1,29 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    MovieCardComponent
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-		HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
-  providers: [HttpClientModule],
+  providers: [],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<app-nav (onSearchFieldChanged)="findMovie($event)">
+<app-nav (onSearchFieldChanged)="findMovie($event)" (onLoginModalVisibleChanged)="loginModalVisible=!loginModalVisible" id='nav'>
 
 </app-nav>
 <!-- Intro Section -->
@@ -42,9 +42,13 @@
   </div>
 </section>
 
-<section *ngIf="searchText" class="grid-cols-3 flex">
-  <div *ngFor="let movie of cachedList" class="w-1/3">
+<section *ngIf="searchText" class="columns-3">
+  <div *ngFor="let movie of cachedList">
     <app-movie-card [movie]="movie">
     </app-movie-card>
   </div>
 </section>
+
+<app-user-auth *ngIf="loginModalVisible" (onModalClose)="loginModalVisible=false" (onLoginStatusChanged)="loginStatusChanged()">
+  
+</app-user-auth>
