@@ -22,21 +22,4 @@ public class DirectorController : ControllerBase
 	{
 		return Ok(await directorRepository.GetAllDirectorsAsync());
 	}
-
-	[HttpPut]
-    [Consumes(MediaTypeNames.Application.Json)]
-    public async Task<ActionResult<Director>> AddDirectorAsync([FromBody] AddDirectorRequest request)
-    {
-		var director = await directorRepository.CreateDirectorAsync(new Director
-		{
-			MovieId = request.MovieId,
-			PersonId = request.PersonId
-		});
-
-		if (director == null)
-        {
-            return BadRequest("A person with the provided person id does not exist or a movie with the provided movie id does not exist.");
-        }
-        return Ok(director);
-    }
 }

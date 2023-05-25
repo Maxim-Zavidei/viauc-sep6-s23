@@ -33,7 +33,7 @@ public class MovieController : ControllerBase
 		{
 			var personDirector = await directorRepository.GetDirectorOfMovie(movie.Id);
 
-			var averageRating = 0;
+			var averageRating = await ratingRepository.GetAverageRatingOfMovie(movie.Id);
 			response.Add(new GetMovieRequest
 			{
 				Id = movie.Id,
@@ -59,7 +59,7 @@ public class MovieController : ControllerBase
 
 		var personDirector = await directorRepository.GetDirectorOfMovie(id);
 
-			var averageRating = 0;
+			var averageRating = await ratingRepository.GetAverageRatingOfMovie(id);
 			return new GetMovieRequest
 			{
 				Id = movie.Id,

@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowMyApp",
-            builder => builder.WithOrigins("http://localhost:4200") 
+            builder => builder.WithOrigins("http://localhost:4200")
                               .AllowAnyHeader()
                               .AllowAnyMethod());
     });
@@ -30,7 +30,8 @@ builder.Services.AddDbContext<IdentityDbContext>(opt =>
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
-    opt.Password.RequiredLength = 8;
+    opt.Password.RequiredLength = 4;
+	opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireLowercase = false;
     opt.Password.RequireUppercase = false;
     opt.Lockout.MaxFailedAccessAttempts = 100;
