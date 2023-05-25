@@ -35,7 +35,7 @@ public class AccountController : ControllerBase
             return BadRequest(ModelState);
         }
     }
-    
+
 
     [HttpPost]
     [Route("register")]
@@ -53,7 +53,7 @@ public class AccountController : ControllerBase
         var result = await this.userManager.CreateAsync(user, registerRequest.Password);
         if (result.Succeeded)
         {
-            return RedirectToPage("/Account/Login");
+            return Ok();
         }
         else
         {

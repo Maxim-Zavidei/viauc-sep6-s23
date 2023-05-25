@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Inject, PLATFORM_ID} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-user-auth',
@@ -27,14 +29,13 @@ registerData: any = {
   phoneNumber: ''
 }
 
-  constructor(private authenticationService: AuthenticationService) {
-    
+  constructor(private authenticationService: AuthenticationService, @Inject(PLATFORM_ID) private platformId: Object) {
+
   }
 
   ngOnInit(): void {
-  
-  }
 
+  }
 
   fieldChanged(formName: string ,fieldName: string, event: any) {
     if (formName === 'login')
@@ -46,6 +47,7 @@ registerData: any = {
 submitRegister() {
   this.authenticationService.register(this.registerData.email, this.registerData.password, this.registerData.confirmPassword).subscribe((data) => {
     console.log(data);
+		this.currentTab = 0;
   })
 }
 
@@ -56,7 +58,9 @@ submitLogin() {
     localStorage.setItem('id', data.id);
     this.onModalClose.emit(true);
     this.onLoginStatusChanged.emit(true);
-    alert('Logged in successfully');
+    if (isPlatformBrowser(this.platformId)) {
+			window.location.reload();
+		}
   })
 
 }

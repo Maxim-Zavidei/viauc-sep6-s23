@@ -5,6 +5,5 @@ namespace Via.Movies.Api.Repositories;
 public interface IRatingRepository
 {
 	Task<IEnumerable<Rating>> GetAllRatingsAsync();
-	Task<Rating?> UpdateRatingAsync(Rating Rating);
-	Task<double> GetAverageRatingOfMovie(int movieId);
+	Task<double> GetAverageRatingOfMovie(long movieId);
 }

@@ -42,14 +42,19 @@ public class MovieRepository : IMovieRepository
 		return await _context.Movies.FirstOrDefaultAsync(e => e.Id == id);
 	}
 
-	public  Task<IEnumerable<Movie?>> SearchForMovieByPeople(string name)
+	public async Task<List<Movie>> SearchForMovie(string query)
 	{
-		throw new NotImplementedException();
-	}
+		var moviesByTitle = await _context.Movies.Where(e => e.Title.ToLower().Contains(query)).Take(5).ToListAsync();
+		var moviesByStar = await _context.Stars.Include(e => e.Person).Include(e => e.Movie).Where(e => e.Person.Name.ToLower().Contains(query)).Take(5).ToListAsync();
+		var moviesByDirector = await _context.Directors.Include(e => e.Person).Include(e => e.Movie).Where(e => e.Person.Name.ToLower().Contains(query)).Take(5).ToListAsync();
 
-	public async Task<IEnumerable<Movie?>> SearchForMovieByTitle(string title)
-	{
-		return await _context.Movies.Where(m => m.Title.Contains(title)).ToListAsync();
+		List<Movie> toReturn = new List<Movie>();
+
+		toReturn.AddRange(moviesByTitle);
+		toReturn.AddRange(moviesByStar.Select(e => e.Movie));
+		toReturn.AddRange(moviesByDirector.Select(e => e.Movie));
+
+		return toReturn;
 	}
 
 	public async Task<Movie?> UpdateMovieAsync(Movie movie)

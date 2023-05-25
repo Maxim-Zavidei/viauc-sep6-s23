@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Via.Movies.Api.Data;
 using Via.Movies.Api.Models;
 using Via.Movies.Api.Repositories;
@@ -19,7 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowMyApp",
-            builder => builder.WithOrigins("http://localhost:4200") 
+            builder => builder.WithOrigins("http://localhost:4200")
                               .AllowAnyHeader()
                               .AllowAnyMethod());
     });
@@ -30,7 +31,8 @@ builder.Services.AddDbContext<IdentityDbContext>(opt =>
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
-    opt.Password.RequiredLength = 8;
+    opt.Password.RequiredLength = 4;
+	opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireLowercase = false;
     opt.Password.RequireUppercase = false;
     opt.Lockout.MaxFailedAccessAttempts = 100;
@@ -56,6 +58,12 @@ builder.Services.AddScoped<IStarRepository, StarRepository>();
 builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<ITopListRepository, TopListRepository>();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Name", Version = "v1" });
+});
 
 
 var app = builder.Build();
@@ -76,6 +84,14 @@ if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+	app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1");
+    });
 }
 
 app.UseHttpsRedirection();

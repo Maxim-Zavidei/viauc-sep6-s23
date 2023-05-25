@@ -6,8 +6,7 @@ namespace Via.Movies.Api.Repositories
     {
         Task<IEnumerable<Movie>> GetSomeMoviesAsync(int number);
         Task<Movie?> GetMovieAsync(int id);
-        Task<IEnumerable<Movie?>> SearchForMovieByTitle(string title);
-        Task<IEnumerable<Movie?>> SearchForMovieByPeople(string name);
+        Task<List<Movie>> SearchForMovie(string query);
         Task<Movie> CreateMovieAsync(Movie movie);
         Task<Movie?> UpdateMovieAsync(Movie movie);
         Task DeleteMovieAsync(int id);

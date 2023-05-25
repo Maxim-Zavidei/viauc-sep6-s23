@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Npgsql.Internal.TypeHandlers;
 using Via.Movies.Api.Data;
 using Via.Movies.Api.Models;
 
@@ -18,42 +19,17 @@ public class RatingRepository : IRatingRepository
 		return await dbContext.Ratings.ToListAsync();
 	}
 
-	public async Task<double> GetAverageRatingOfMovie(int movieId)
+	public async Task<double> GetAverageRatingOfMovie(long movieId)
 	{
-		var ratings = await dbContext.Ratings.Where(e => e.MovieId == movieId).ToListAsync();
+		var rating = await dbContext.Ratings.Where(e => e.MovieId == movieId).FirstOrDefaultAsync();
 
-		double averageRating = ratings.Sum(e => e.Rating1 * e.Votes);
-		int totalRatings = ratings.Sum(e => e.Votes);
-
-		return averageRating / totalRatings;
-	}
-
-	public async Task<Rating?> UpdateRatingAsync(Rating rating)
-	{
-		if (rating.Rating1 < 0) return null;
-
-
-		Rating? foundRating = await dbContext.Ratings.FirstOrDefaultAsync(e => e.MovieId == rating.MovieId && e.Rating1 == rating.Rating1);
-		Rating updatedRating;
-		if (foundRating != null)
+		if (rating == null)
 		{
-			updatedRating = dbContext.Update(new Rating
-			{
-				MovieId = foundRating.MovieId,
-				Rating1 = foundRating.Rating1,
-				Votes = foundRating.Votes + 1
-			}).Entity;
+			return 0;
 		}
 		else
 		{
-			await dbContext.AddAsync(new Rating
-			{
-				MovieId = foundRating.MovieId,
-				Rating1 = foundRating.Rating1,
-				Votes = foundRating.Votes + 1
-			});
-			updatedRating = rating;
+			return rating.RatingValue;
 		}
-		return updatedRating;
 	}
 }

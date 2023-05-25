@@ -1,0 +1,25 @@
+.heart-icon
+{
+	color: rgb(131, 140, 244);
+	stroke: white;
+  	stroke-width: 30px;
+}
+
+@keyframes raise {
+	0% {
+	  transform: translateY(0) scale(1);
+	}
+	50% {
+	  transform: translateY(-2px) scale(1.05);
+	}
+	100% {
+	  transform: translateY(0) scale(1);
+	}
+  }
+
+  .hover-raise-bigger:hover {
+	animation: raise 0.3s ease-in-out;
+	transform-origin: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	transition-duration: 300ms;
+  }

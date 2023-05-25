@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserAuthComponent } from './user/user-auth/user-auth.component';
+import { HomeComponent } from './home/home.component';
+import { TopListComponent } from './top-list/top-list.component';
 
 const routes: Routes = [
-  { path: 'login', component: UserAuthComponent },
-  { path: 'register', component: UserAuthComponent },
-  { path: '', redirectTo: '/', pathMatch: 'full' }
+	{ path: '', component: HomeComponent },
+  { path: 'top-list', component: TopListComponent }
 ];
 
 @NgModule({

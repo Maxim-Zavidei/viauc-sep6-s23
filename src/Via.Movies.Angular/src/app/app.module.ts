@@ -7,14 +7,18 @@ import { NavComponent } from './nav/nav.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { TopListComponent } from './top-list/top-list.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+		HomeComponent,
     NavComponent,
     MovieCardComponent,
+    TopListComponent
   ],
   imports: [
     BrowserModule,

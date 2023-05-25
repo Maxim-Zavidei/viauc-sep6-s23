@@ -17,13 +17,12 @@ public class DirectorRepository : IDirectorRepository
 		return await dbContext.Directors.ToListAsync();
 	}
 
-	public async Task<Person?> GetDirectorOfMovie(int movieId)
+	public async Task<Person?> GetDirectorOfMovie(long movieId)
 	{
-		var director = await dbContext.Directors.FirstOrDefaultAsync(e => e.MovieId == movieId);
+		var director = await dbContext.Directors.Include(e => e.Person).FirstOrDefaultAsync(e => e.MovieId == movieId);
 
 		if (director == null) return null;
-		var personDirector = await dbContext.People.FirstOrDefaultAsync(e => e.Id == director.PersonId);
-		return personDirector;
+		return director.Person;
 	}
 
 	public async Task<Director> CreateDirectorAsync(Director director)

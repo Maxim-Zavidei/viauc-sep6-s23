@@ -1,54 +1,14 @@
-<app-nav (onSearchFieldChanged)="findMovie($event)" (onLoginModalVisibleChanged)="loginModalVisible=!loginModalVisible" id='nav'>
+<body>
+	<app-nav (onSearchFieldChanged)="findMovie($event)" (onLoginModalVisibleChanged)="loginModalVisible=!loginModalVisible" id='nav'></app-nav>
 
-</app-nav>
-<!-- Intro Section -->
-<section class="relative overflow-hidden mb-2" *ngIf="!searchText">
-  <!-- The video -->
-  <video autoplay muted loop class="w-full h-full object-cover absolute z-0">
-    <source src="assets/video/hero.webm" type="video/webm">
-  </video>
+	<router-outlet *ngIf="!searchText"></router-outlet>
 
-  <div class="bg-gradient absolute w-full h-full z-40 opacity-60"></div>
+	<section *ngIf="searchText" class="columns-3">
+		<div *ngFor="let movie of cachedList">
+			<app-movie-card [movie]="movie">
+			</app-movie-card>
+		</div>
+	</section>
 
-  <div class="w-full h-full absolute z-40">
-    <div class="cube"></div>
-    <div class="cube"></div>
-    <div class="cube"></div>
-    <div class="cube"></div>
-    <div class="cube"></div>
-  </div>
-
-  <div class="container mx-auto relative z-50">
-    <div class="text-center px-20 py-60 w-full md:w-8/12 mx-auto">
-      <h1 class="text-7xl font-bold uppercase mb-2">Share the magic of movies!"</h1>
-      <p>
-        Discover, rate, and share your favorite movies with the world! Our top-rated movie app provides easy search,
-        actor information, and user-friendly tools to enhance your movie-watching experience.
-        Start exploring today!
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Main Content -->
-<section class="container mx-auto" *ngIf="!searchText">
-  <h1 class="uppercase text-center text-4xl grid mt-20 mb-12 items-center gap-8 tracking-widest latest">Latest</h1>
-
-  <!-- Snoozeflix List -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-    <ng-container *ngFor="let movie of movies">
-		<app-movie-card *ngIf="movie.imageURL != null" [movie]="movie"></app-movie-card>
-	</ng-container>
-  </div>
-</section>
-
-<section *ngIf="searchText" class="columns-3">
-  <div *ngFor="let movie of cachedList">
-    <app-movie-card [movie]="movie">
-    </app-movie-card>
-  </div>
-</section>
-
-<app-user-auth *ngIf="loginModalVisible" (onModalClose)="loginModalVisible=false" (onLoginStatusChanged)="loginStatusChanged()">
-  
-</app-user-auth>
+	<app-user-auth *ngIf="loginModalVisible" (onModalClose)="loginModalVisible=false" (onLoginStatusChanged)="loginStatusChanged()"></app-user-auth>
+</body>
