@@ -1,8 +1,10 @@
-<a href="#"
-	class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary transform hover:-translate-y-2 hover:shadow-2xl transition duration-300"s>
+<div
+	class="mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary transform hover:-translate-y-2 hover:shadow-2xl transition duration-300">
 
 	<!-- Image -->
-	<img class="card-img-top rounded-tl-2xl w-full" src="{{ movie?.imageURL }}">
+	<a href="#">
+		<img class="card-img-top rounded-tl-2xl w-full" src="{{ movie?.imageURL }}">
+	</a>
 
 	<!-- Shape -->
 	<div class="relative">
@@ -19,24 +21,44 @@
 	<!-- Body -->
 	<div class="p-8">
 
-		<!-- Heading -->
-		<h2 class="text-3xl mb-2">
-			{{ movie?.title }}
-		</h2>
+		<ul class="flex flex-wrap mb-0">
+      <li class="flex-auto text-left">
+
+        <!-- Heading -->
+				<h2 class="text-3xl mb-2">
+					{{ movie?.title }}
+				</h2>
+
+      </li>
+      <li class="flex-auto">
+				<!-- Average rating -->
+        <p class="mb-0 text-right">
+					<span class="text-gray-400"> Average Rating &#183; </span>
+					{{ movie?.averageRating }}
+				</p>
+      </li>
+    </ul>
 
 		<div>
-			<p class="mb-0 text-right">
-				<span class="text-gray-400"> Average Rating &#183; </span>
-				{{ movie?.averageRating }}
-			</p>
 
-			<!-- Name & Date -->
-			<p class="mb-0 text-left">
-				{{ movie?.directorName }} &#183;
-				<span class="text-gray-400"> {{ movie?.year }}</span>
-			</p>
+			<ul class="flex flex-wrap mb-0">
+				<li class="flex-auto text-left">
+
+					<!-- Name & Date -->
+					<p class="mb-0 text-left">
+						{{ movie?.directorName }} &#183;
+						<span class="text-gray-400"> {{ movie?.year }}</span>
+					</p>
+
+				</li>
+				<li class="flex-auto text-right" *ngIf="userEmail != '' && !wasHeartClicked">
+					<button class="heart-button p-3 hover:animate-bounce" (click)="addToTopList(movie?.id)">
+						<i class="fa-solid fa-heart fa-xl heart-icon"></i>
+					</button>
+				</li>
+			</ul>
 		</div>
 
 	</div>
 
-</a>
+</div>
