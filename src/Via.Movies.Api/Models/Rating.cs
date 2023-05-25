@@ -1,8 +1,10 @@
 ﻿namespace Via.Movies.Api.Models;
 
-public partial class Rating
+public class Rating
 {
-    public required int MovieId { get; set; }
-    public required float Rating1 { get; set; }
-    public required int Votes { get; set; }
+	public required long MovieId { get; set; }
+	public required double RatingValue { get; set; }
+	public required long Votes { get; set; }
+
+	public required virtual Movie Movie { get; set; }
 }

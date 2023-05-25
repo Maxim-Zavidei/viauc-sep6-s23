@@ -1,7 +1,10 @@
 ﻿namespace Via.Movies.Api.Models;
 
-public partial class Director
+public class Director
 {
-    public required int MovieId { get; set; }
-    public required int PersonId { get; set; }
+	public required long MovieId { get; set; }
+	public required long PersonId { get; set; }
+
+	public required virtual Movie Movie { get; set; }
+	public required virtual Person Person { get; set; }
 }
