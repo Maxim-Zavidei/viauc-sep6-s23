@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Via.Movies.Api.Data.Migrations
+namespace Via.Movies.Api.Data.Migrations.IdentityDbContextMigrations
 {
     /// <inheritdoc />
-    public partial class InitialIdentityContextCreation : Migration
+    public partial class RetryCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

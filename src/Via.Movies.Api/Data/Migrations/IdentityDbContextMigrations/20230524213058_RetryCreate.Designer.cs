@@ -9,11 +9,11 @@ using Via.Movies.Api.Data;
 
 #nullable disable
 
-namespace Via.Movies.Api.Data.Migrations
+namespace Via.Movies.Api.Data.Migrations.IdentityDbContextMigrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20230519140200_InitialIdentityContextCreation")]
-    partial class InitialIdentityContextCreation
+    [Migration("20230524213058_RetryCreate")]
+    partial class RetryCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

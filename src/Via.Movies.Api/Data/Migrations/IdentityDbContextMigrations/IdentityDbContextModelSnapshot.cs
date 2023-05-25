@@ -8,7 +8,7 @@ using Via.Movies.Api.Data;
 
 #nullable disable
 
-namespace Via.Movies.Api.Data.Migrations
+namespace Via.Movies.Api.Data.Migrations.IdentityDbContextMigrations
 {
     [DbContext(typeof(IdentityDbContext))]
     partial class IdentityDbContextModelSnapshot : ModelSnapshot
