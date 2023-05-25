@@ -107,7 +107,7 @@ public class ViaMoviesDbContext : DbContext
 
 		modelBuilder.Entity<TopListMovie>(entity =>
         {
-            entity.HasNoKey();
+			entity.HasKey(t => new { t.MovieId, t.UserEmail });
             entity.ToTable("toplist_movie");
 
             entity.Property(e => e.MovieId).HasColumnName("movie_id");
