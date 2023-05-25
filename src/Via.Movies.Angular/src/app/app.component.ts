@@ -1,6 +1,5 @@
 import { NgFor } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-
 import { MovieService } from './services/movie.service';
 import { NavComponent } from './nav/nav.component';
 
@@ -29,9 +28,6 @@ export class AppComponent {
       this.movies = data;
       this.cachedList = this.movies;
     });
-    // for (let director of this.directors) {
-    //   this.movies.find(movie => movie.Id === director.MovieId).Director = this.persons.find(person => person.Id === director.PersonId).Name;
-    // }
   }
 
   findMovie(searchText: string) {
@@ -48,6 +44,5 @@ export class AppComponent {
     this.loginModalVisible = false;
     if (this.nav)
     this.nav.loginStatusChanged();
-    
   }
 }
