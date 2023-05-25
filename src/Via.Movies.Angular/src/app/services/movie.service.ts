@@ -37,4 +37,50 @@ export class MovieService {
       })
     );
   }
+
+	searchForMovies(query: string): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(environment.baseApiUrl + 'movie/search?query=' + query).pipe(
+      mergeMap(movies => {
+        // For each movie, we create a request to TMDB API to fetch movie details
+        const requests = movies.map(movie =>
+          this.httpClient.get<any>(`${this.tmdbURL}?api_key=${this.tmdbAPIKey}&query=${movie.title}`).pipe(
+            map(response => {
+              // The 'poster_path' from TMDB response is combined with the base image URL to create the full image URL
+              const posterPath = response.results[0]?.poster_path;
+              const imageURL = posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : null;
+              // Return a new object that includes the original movie properties and the image URL
+              return { ...movie, imageURL };
+            })
+          )
+        );
+        // Return a single observable that emits when all requests have completed
+        return forkJoin(requests) as Observable<Movie[]>;
+      })
+    );
+  }
+
+	getTopListMovies(email: string): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(environment.baseApiUrl + 'TopList?email=' + email).pipe(
+      mergeMap(movies => {
+        // For each movie, we create a request to TMDB API to fetch movie details
+        const requests = movies.map(movie =>
+          this.httpClient.get<any>(`${this.tmdbURL}?api_key=${this.tmdbAPIKey}&query=${movie.title}`).pipe(
+            map(response => {
+              // The 'poster_path' from TMDB response is combined with the base image URL to create the full image URL
+              const posterPath = response.results[0]?.poster_path;
+              const imageURL = posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : null;
+              // Return a new object that includes the original movie properties and the image URL
+              return { ...movie, imageURL };
+            })
+          )
+        );
+        // Return a single observable that emits when all requests have completed
+        return forkJoin(requests) as Observable<Movie[]>;
+      })
+    );
+  }
+
+	addToTopList(email: string, movieId: number) {
+		return this.httpClient.post<any>(environment.baseApiUrl + 'TopList', { userEmail:email, movieId:movieId })
+  }
 }
