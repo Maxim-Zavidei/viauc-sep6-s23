@@ -18,6 +18,7 @@ public class ViaMoviesDbContext : DbContext
     public required virtual DbSet<Person> People { get; set; }
     public required virtual DbSet<Rating> Ratings { get; set; }
     public required virtual DbSet<Star> Stars { get; set; }
+	public required virtual DbSet<TopListMovie> TopListMovies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -101,6 +102,20 @@ public class ViaMoviesDbContext : DbContext
             entity.HasOne(d => d.Person)
                 .WithMany()
                 .HasForeignKey(d => d.PersonId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+		modelBuilder.Entity<TopListMovie>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToTable("toplist_movie");
+
+            entity.Property(e => e.MovieId).HasColumnName("movie_id");
+            entity.Property(e => e.UserEmail).HasColumnName("user_email");
+
+            entity.HasOne(d => d.Movie)
+                .WithMany()
+                .HasForeignKey(d => d.MovieId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });
     }
