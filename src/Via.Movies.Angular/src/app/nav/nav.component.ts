@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, Inject, OnInit, Output, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,7 @@ export class NavComponent implements OnInit {
   @Output() onLoginModalVisibleChanged: EventEmitter<any> = new EventEmitter<any>();
   userEmail: any = '';
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
     this.loginStatusChanged();
@@ -30,7 +31,9 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.loginStatusChanged();
-    alert('Logged out successfully');
+		if (isPlatformBrowser(this.platformId)) {
+			window.location.reload();
+		}
   }
-  
+
 }
