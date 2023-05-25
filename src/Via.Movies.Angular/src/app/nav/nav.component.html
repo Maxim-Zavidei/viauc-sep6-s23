@@ -9,8 +9,11 @@
             <a class="px-2" href="#" (click)="onLoginModalVisibleChanged.emit(true)" *ngIf="userEmail === '' ">Login / Register</a>
             <strong *ngIf="userEmail != '' ">{{userEmail}}</strong>
           </li>
-          <li>
-            <a class="px-2" href="#">Browse</a>
+					<li>
+            <a class="px-2" href="/">Home</a>
+          </li>
+          <li *ngIf="userEmail != '' ">
+            <a class="px-2" href="/top-list">Top list</a>
           </li>
           <li>
             <a class="px-2" href="about.html">About</a>
