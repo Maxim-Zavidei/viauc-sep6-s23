@@ -1,7 +1,7 @@
-import { NgFor } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { MovieService } from './services/movie.service';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NavComponent } from './nav/nav.component';
+import { MovieService } from './services/movie.service';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,37 +10,42 @@ import { NavComponent } from './nav/nav.component';
 })
 export class AppComponent {
 
+	@Output() onSearchFieldChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onLoginModalVisibleChanged: EventEmitter<any> = new EventEmitter<any>();
+	@ViewChild('nav', {static: false}) nav: NavComponent | undefined;
 
-  searchText = '';
-  loginModalVisible = false;
-  movies: any[] = [];
-  persons: any[] = [];
-  directors: any[] = [];
-  title = 'Via.Movies.Angular';
-  @ViewChild('nav', {static: false}) nav: NavComponent | undefined;
-
-  cachedList: any[] = [];
+	title = 'Snoozeflix';
+  userEmail: any = '';
+	loginModalVisible = false;
+	searchText = '';
+	cachedList: any[] = [];
+	movies: any[] = [];
 
 	constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.movieService.getMovies().subscribe((data: any[]) => {
-      this.movies = data;
-      this.cachedList = this.movies;
-    });
+    this.loginStatusChanged();
   }
 
-  findMovie(searchText: string) {
+	findMovie(searchText: string) {
+		debounceTime(700);
+
     this.searchText = searchText;
     if (searchText === '') {
       this.cachedList = this.movies;
     }
     else {
-      this.cachedList = this.movies.filter(movie => movie.title.toLowerCase().includes(searchText.toLowerCase()) || movie.directorName.toLowerCase().includes(searchText.toLowerCase()));
+			this.cachedList = []
+			if (searchText.length > 3)
+			{
+				this.movieService.searchForMovies(searchText).subscribe((data: any[]) => {
+					this.cachedList = data;
+				});
+			}
     }
   }
 
-  loginStatusChanged() {
+	loginStatusChanged() {
     this.loginModalVisible = false;
     if (this.nav)
     this.nav.loginStatusChanged();
