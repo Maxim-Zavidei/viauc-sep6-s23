@@ -1,0 +1,53 @@
+<div
+    class="mt-6 rounded-tl-2xl 
+    rounded-br-2xl shadow-xl bg-secondary 
+    transform hover:-translate-y-2 columns-2
+    hover:shadow-2xl transition duration-300">
+    
+    <div>
+        <img [src]="moviePoster" *ngIf="moviePoster" alt="" height="200" class="w-auto">
+        <div class="relative">
+            <div class="absolute pointer-events-none bottom-full w-full bg-secondary text-white">
+                <div class="absolute bottom-full w-full pb-5 overflow-hidden">
+                    <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full tranform"
+                        style="transform-origin: top center; transform: scale(2);">
+                        <path d="M0 25h25L75 0h25v50H0z" fill="#283046"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="pt-8">
+
+        <ul class="mb-0">
+            <li class="flex-auto text-left">
+                <!-- Heading -->
+                <h2 class="text-3xl mb-2">
+                    {{ movie?.title }}
+                </h2>
+                <span class="text-gray-400"> Average Rating &#183; </span>
+                {{ movie?.averageRating }}
+            </li>
+        </ul>
+        <ul class="flex flex-wrap mb-8">
+            <li class="flex-auto text-left">
+                <!-- Name & Date -->
+                <p class="mb-0 text-left">
+                    {{ movie?.directorName }} &#183;
+                    <span class="text-gray-400"> {{ movie?.year }}</span>
+                </p>
+            </li>
+           
+        </ul>
+        <!--Stars-->
+        <div *ngIf="movieStars" class="mb-0 text-left">
+            <span class="text-gray-400">Stars &#183; </span>
+            <div *ngFor="let movieStar of movieStars">
+                {{ movieStar.person.name }}
+            </div>
+        </div> 
+    </div>
+
+</div>
