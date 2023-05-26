@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { TopListComponent } from './top-list/top-list.component';
+import { MovieInfoPageComponent } from './movie-info-page/movie-info-page.component';
 
 
 
@@ -18,7 +19,8 @@ import { TopListComponent } from './top-list/top-list.component';
 		HomeComponent,
     NavComponent,
     MovieCardComponent,
-    TopListComponent
+    TopListComponent,
+    MovieInfoPageComponent
   ],
   imports: [
     BrowserModule,

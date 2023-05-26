@@ -11,4 +11,5 @@ public class GetMovieRequest
 	public long? DirectorId { get; set; }
 	public string? DirectorName { get; set; }
     public long? DirectorBirth { get; set; }
+
 }

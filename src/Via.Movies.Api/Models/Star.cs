@@ -7,4 +7,5 @@ public class Star
 
 	public required virtual Movie Movie { get; set; }
 	public required virtual Person Person { get; set; }
+
 }
