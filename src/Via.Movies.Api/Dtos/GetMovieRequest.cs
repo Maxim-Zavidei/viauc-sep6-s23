@@ -11,4 +11,7 @@ public class GetMovieRequest
 	public long? DirectorId { get; set; }
 	public string? DirectorName { get; set; }
     public long? DirectorBirth { get; set; }
+
+    public List<GetStarRequest> Stars { get; set; } = new List<GetStarRequest>();
+
 }

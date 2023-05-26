@@ -13,12 +13,14 @@ public class MovieController : ControllerBase
     private IMovieRepository movieRepository;
 	private IDirectorRepository directorRepository;
 	private IRatingRepository ratingRepository;
+    private IStarRepository starRepository;
 
-    public MovieController(IMovieRepository movieRepository, IDirectorRepository directorRepository, IRatingRepository ratingRepository)
+    public MovieController(IMovieRepository movieRepository, IDirectorRepository directorRepository, IRatingRepository ratingRepository, IStarRepository starRepository)
     {
         this.movieRepository = movieRepository;
 		this.directorRepository = directorRepository;
 		this.ratingRepository = ratingRepository;
+        this.starRepository = starRepository;
     }
 
     [HttpGet]
@@ -60,6 +62,7 @@ public class MovieController : ControllerBase
 		var personDirector = await directorRepository.GetDirectorOfMovie(id);
 
 			var averageRating = await ratingRepository.GetAverageRatingOfMovie(id);
+            List<GetStarRequest> stars = new List<GetStarRequest>();
 			return new GetMovieRequest
 			{
 				Id = movie.Id,
@@ -68,7 +71,8 @@ public class MovieController : ControllerBase
 				AverageRating = averageRating,
 				DirectorId = personDirector == null ? null : personDirector.Id,
 				DirectorName = personDirector == null ? null : personDirector.Name,
-				DirectorBirth = personDirector == null ? null : personDirector.Birth
+				DirectorBirth = personDirector == null ? null : personDirector.Birth,
+                
 			};
     }
 
