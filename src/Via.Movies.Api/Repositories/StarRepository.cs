@@ -31,4 +31,9 @@ public class StarRepository : IStarRepository
 		await dbContext.SaveChangesAsync();
 		return newStar.Entity;
 	}
+
+	public async Task<IEnumerable<Star>> GetStarsForMovieAsync(long movieId)
+	{
+		return await dbContext.Stars.Include(e => e.Person).Where(e => e.MovieId == movieId).ToListAsync();
+	}
 }
