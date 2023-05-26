@@ -17,6 +17,16 @@ export class MovieService {
 		private httpClient: HttpClient
 	) { }
 
+  getMoviePoster(title: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.tmdbURL}?api_key=${this.tmdbAPIKey}&query=${title}`);
+  }
+
+  getMovie(id: number): Observable<Movie> {
+    return this.httpClient.get<Movie>(environment.baseApiUrl + 'movie/' + id) 
+    };
+
+
+
 	getMovies(): Observable<Movie[]> {
     return this.httpClient.get<Movie[]>(environment.baseApiUrl + 'movie?number=18').pipe(
       mergeMap(movies => {
