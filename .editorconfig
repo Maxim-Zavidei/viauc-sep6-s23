@@ -18,9 +18,10 @@ dotnet_sort_system_directives_first = true:warning
 indent_size = 2
 
 [*.html]
-indent_size = 4
+indent_size = 2
 
 [*.ts]
+indent_size = 2
 quote_type = single
 
 [*.md]

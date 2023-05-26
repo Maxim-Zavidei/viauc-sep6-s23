@@ -1,0 +1,79 @@
+<app-model (onModalClose)="onModalClose.emit(true)">
+    <!-- Tabs -->
+    <ul class="flex flex-wrap mb-4">
+      <li class="flex-auto text-center" [class.bg-indigo-400]="currentTab==0">
+        <button class="rounded py-3 px-4 transition hover:text-white text-white" (click)="currentTab=0">Login</button>
+      </li>
+      <li class="flex-auto text-center" [class.bg-indigo-400]="currentTab==1">
+        <button class="rounded py-3 px-4 transition hover:text-indigo-400" (click)="currentTab=1">Register</button>
+      </li>
+    </ul>
+
+    <!-- Login Form -->
+    <div *ngIf="currentTab==0">
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Email</label>
+        <input type="email" (keyup)="fieldChanged('login', 'email', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+            duration-500 focus:outline-none rounded bg-transparent
+            focus:border-indigo-400"
+          placeholder="Enter Email" />
+      </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Password</label>
+        <input type="password" (keyup)="fieldChanged('login', 'password', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+          duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+          placeholder="Password" />
+      </div>
+
+      <button type="submit" (click)="submitLogin()"
+        class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
+          hover:bg-indigo-500">
+        Submit
+      </button>
+
+    </div>
+    <!-- Registration Form -->
+    <div *ngIf="currentTab==1">
+      <!-- Name -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Name</label>
+        <input type="name"  (keyup)="fieldChanged('register','name', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+            duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+          placeholder="Enter Name" />
+      </div>
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Email</label>
+        <input type="email"  (keyup)="fieldChanged('register','email', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+            duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+          placeholder="Enter Email" />
+      </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Password</label>
+        <input type="password" (keyup)="fieldChanged('register','password', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+            duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+          placeholder="Password" />
+      </div>
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label class="inline-block mb-2">Confirm Password</label>
+        <input type="password" (keyup)="fieldChanged('register','confirmPassword', $event)"
+          class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+            duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+          placeholder="Confirm Password" />
+      </div>
+      <button type="submit" (click)="submitRegister()"
+        class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
+          hover:bg-indigo-500">
+        Submit
+      </button>
+    </div>
+</app-model>

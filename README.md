@@ -14,10 +14,10 @@ Before you start, ensure you have the following software installed on your syste
 
 # User Stories:
 
-- [x] As a user I want to be able to search for a specific movie by its title and author, so I could easily find my relevant movie.
-- [ ] As a user I want to be able to see a dedicated page of any movie, where it would show the image, title, rating, actors, directors and any other relevant data if the movie has it.
+- [x] As a user I want to be able to search for a specific movie by its title, stars and director, so I could easily find my relevant movie.
+- [x] As a user I want to be able to see a detected page of any movie, where it would show the image, title, rating, actors, directors and any other relevant data if the movie has it.
 - [ ] As a user I want to be able to create a review of a movie with a rating and a comment, so that other people can see my rating.
-- [ ] As a user I want to be able to create many top lists of my favorite movies, so that I can come back and overview my list. 
+- [x] As a user I want to be able to create many top lists of my favorite movies, so that I can come back and overview my list. 
 - [x] As a user I want to be able to register myself so that I can use the platform with additional features.
 - [x] As a user I want to be able to log in in the system, so that I can use the platform.
 - [ ] As an admin I want to be able to see the average rating of all movies and actors that have starred in. 
