@@ -5,6 +5,5 @@ namespace Via.Movies.Api.Repositories;
 public interface IStarRepository
 {
 	Task<IEnumerable<Star>> GetAllStarsAsync();
-	Task<Star> CreateStarAsync(Star star);
 	Task<IEnumerable<Star>> GetStarsForMovieAsync(long movieId);
 }
